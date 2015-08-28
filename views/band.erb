@@ -1,5 +1,11 @@
-<h1><%= @band.name %><h1>
+<h1><%= @band.name %></h1>
 
 <p><a href="/bands/<%= @band.id %>/edit">Update Band</a><p>
 
-<p><a href="/bands/<%= @band.id %>/delete">Delete</a> </p>
+<a href="/bands/<%= @band.id %>/venue/new"> Add Venues Played</a>
+<br>
+
+<% @band.venues.each do |venue| %>
+<li> <%= venue.name %></li>
+<% end %>
+<a href="/bands">Back</a>

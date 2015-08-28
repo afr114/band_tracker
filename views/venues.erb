@@ -1,0 +1,35 @@
+<table class="table table-striped">
+  <thead>
+    <th>Venue Name</th>
+  </thead>
+  <tbody>
+    <% Venue.all.each do |venue| %>
+    <tr>
+      <td>
+        <%= venue.name %>
+      </td>
+      <td>
+        <td><form action = "/venues/<%= venue.id() %>" method="post">
+          <div class="form-group">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn-danger">Delete</button>
+          </div>
+        </form></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>Don't see your venue?  Add them below<h4>
+
+
+  <form action="/venues" method="post" id="venuesform">
+    <div class='form-group'>
+      <label for="name">Enter the venue name</label>
+      <input type="text" name="name" class='form-control' placeholder='Enter Venue Name' required='true'>
+    </div>
+    <button class="btn btn-success"type='submit'>Submit</button>
+  </form>
+<br>
+<a href="/">Back</a>
