@@ -1,3 +1,27 @@
 <h1>Artist List</h1>
 
+<table class="table table-striped table-condensed table-hover table-bordered">
+  <thead>
+      <th>Band Name</th>
+  </thead>
+  <tbody>
+    <% Band.all.each do |band| %>
+    <tr>
+      <td>
+        <a href="/bands/<%= band.id %>"><%= band.name %></a>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
 <h4>Don't see your band?  Add them below<h4>
+
+
+  <form action="/bands" method="post" id="bandsform">
+    <div class='form-group'>
+      <label for="name">Enter the band name</label>
+      <input type="text" name="name" class='form-control' placeholder='Enter Band Name' required='true'>
+    </div>
+    <button class="btn btn-success"type='submit'>Submit</button>
+  </form>

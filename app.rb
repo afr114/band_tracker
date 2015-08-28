@@ -13,3 +13,13 @@ end
 get '/bands' do
   erb(:bands)
 end
+
+post '/bands' do
+  @band = Band.create({ name: params['name']})
+  redirect "/bands/#{@band.id}"
+end
+
+get '/bands/:id' do
+  @band = Band.find(params['id'].to_i)
+  erb(:band)
+end
