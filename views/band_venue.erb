@@ -1,5 +1,18 @@
 <h1> Add Venues </h1>
 
-<% @venues.each() do |venue| %>
-  <%= venue.name =>
+<h3>Select all venues where this band played</h3>
+
+<% if @venues.any?() %>
+<form action="/bands/<%= @band.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% @venues.each() do |venue| %>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="name" value="<%= venue.id() %>"><%= venue.name() %>
+    </label>
+  </div>
   <% end %>
+
+  <button type="submit">Add venues</button>
+</form>
+<% end %>

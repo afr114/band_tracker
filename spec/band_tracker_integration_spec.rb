@@ -10,4 +10,22 @@ describe 'band_tracker path', { type: :feature } do
     click_button 'Submit'
     expect(page).to have_content 'Great New Band'
   end
+
+  it 'can update the band name' do
+    @band = Band.create({name: "Great New Band"})
+    visit '/bands'
+    click_link "#{@band.name}"
+    click_link 'Update Band'
+    fill_in 'name', with: 'Corndog'
+    click_button 'Submit'
+    expect(page).to have_content 'Corndog'
+  end
+
+
+  it 'will remove a band' do
+    @band = Band.create({name: "Great New Band"})
+    visit '/bands'
+    click_button 'Delete'
+    expect(page).not_to have_content 'Great New Band'
+  end
 end

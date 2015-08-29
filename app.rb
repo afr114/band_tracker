@@ -30,7 +30,9 @@ get '/bands/:id/edit' do
 end
 
 patch '/bands/:id' do
-  @band = Band.create({ name: params['name'] })
+  @band = Band.find(params.fetch("id").to_i())
+  name = params.fetch("name")
+  @band.update({:name => name})
   redirect "/bands/#{@band.id}"
 end
 
@@ -58,8 +60,8 @@ delete '/venues/:id' do
 end
 
 get '/bands/:id/venue/new' do
-  @band = Band.find(params['id'].to_i)
   @venues = Venue.all
+  @band = Band.find(params['id'].to_i)
   erb(:band_venue)
 end
 
