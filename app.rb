@@ -15,8 +15,9 @@ get '/bands' do
 end
 
 post '/bands' do
-  @band = Band.create({ name: params['name']})
-  redirect "/bands/#{@band.id}"
+  name = params.fetch('name')
+  Band.create({:name => name})
+  redirect "/bands"
 end
 
 get '/bands/:id' do
@@ -65,9 +66,10 @@ get '/bands/:id/venue/new' do
   erb(:band_venue)
 end
 
-post '/bands/:id/venues' do
-  @band = Band.find(params['id'].to_i)
-  @venue = Venue.create({name: params['venue_name']})
-  @band.venues.push(@venue)
+patch '/bands/:id/venue' do
+  @band = Band.find(params.fetch("id").to_i())
+  venue = Venue.find(params.fetch("venue_id").to_i())
+  @bands = Band.find(params.fetch("id").to_i())
+  @bands.venues.push(venue)
   redirect "/bands/#{@band.id}"
 end

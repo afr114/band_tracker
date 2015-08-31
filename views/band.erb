@@ -5,7 +5,17 @@
 <a href="/bands/<%= @band.id %>/venue/new"> Add Venues Played</a>
 <br>
 
-<% @band.venues.each do |venue| %>
-<li> <%= venue.name %></li>
+<% if @band.venues.any? %>
+<h3> Played at: </h3>
+<ul>
+<% @band.venues.each() do |band_venue| %>
+  <li><%= band_venue.name %></li>
+  <% end %>
+</ul>
+
+<% else %>
+<p><strong>This band has not played at any venues.</strong></p>
+<br>
 <% end %>
+
 <a href="/bands">Back</a>
