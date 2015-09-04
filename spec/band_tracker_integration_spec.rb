@@ -3,6 +3,7 @@ Capybara.app = Sinatra::Application
 set(:show_exceptions, false)
 
 describe 'band_tracker path', { type: :feature } do
+
   it 'can create a new band' do
     visit '/'
     click_link "Find Your Favorite Band"
@@ -27,5 +28,22 @@ describe 'band_tracker path', { type: :feature } do
     visit '/bands'
     click_button 'Delete'
     expect(page).not_to have_content 'Great New Band'
+  end
+
+
+  it 'can create a new venue' do
+    visit '/'
+    click_link "Find a venue"
+    fill_in 'name', with: 'Great New Venue'
+    click_button 'Submit'
+    expect(page).to have_content 'Great New Venue'
+  end
+
+
+  it 'will remove a venue' do
+    @venue = Venue.create({name: "Great New Venue"})
+    visit '/venues'
+    click_button 'Delete'
+    expect(page).not_to have_content 'Great New Venue'
   end
 end
